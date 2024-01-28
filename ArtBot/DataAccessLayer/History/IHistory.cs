@@ -1,18 +1,11 @@
 ﻿namespace ArtBot.DataAccessLayer.History
 {
     /// <summary>
-    /// Интерфейс IHistory определяет свойство класса History.
-    /// Свойство History хранит в себе историю изменений объекта.
+    /// В этом интерфейсе определено свойство History, которое возвращает объект класса History. 
+    /// Классы, реализующие этот интерфейс, должны предоставить реализацию этого свойства, которая хранит объект истории.
+    /// </summary>
     public interface IHistory
     {
-        private History<string> _history;
-    }
-
-    internal interface IHistory
-    {
-        /// <summary>
-        /// Интерфейс IUpdate определяет свойство класса History.
-        /// Свойство History хранит в себе историю изменений объекта.        
-        public History<string> History { get; }
+        History History { get; }
     }
 }
