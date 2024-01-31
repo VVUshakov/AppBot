@@ -7,7 +7,7 @@
     /// /// </summary>
     public class History
     {
-        private readonly Dictionary<string, Dictionary<DateTime, string>> _history = [];
+        public Dictionary<string, Dictionary<DateTime, string>> HistoryChanges { get; } = [];
 
         /// <summary>
         /// Метод Add используется для добавления новой пары ключ-значение в историю изменений объекта.
@@ -16,21 +16,30 @@
         /// </summary>
         /// <param name="propertyName">Имя изменяемого свойства</param>
         /// <param name="newValue">Новое значение свойства</param>
-        /// <param name="time">Время изменения</param>
-        public void Add(string propertyName, string newValue, DateTime time) => _history[propertyName].Add(time, newValue);
+        /// <param name="dateAndTime">Время изменения</param>
+        public void Add(string propertyName, DateTime dateAndTime, string newValue)
+        {
+            if (!HistoryChanges.TryGetValue(propertyName, out Dictionary<DateTime, string>? value))
+            {
+                value = [];
+                HistoryChanges[propertyName] = value;
+            }
+
+            value.Add(dateAndTime, newValue);
+        }
 
         /// <summary>
         /// Метод GetAllHistory возвращает всю историю изменений объекта класса.
         /// </summary>
         /// <returns>История изменений объекта</returns>
-        public Dictionary<string, Dictionary<DateTime, string>> GetAllHistory() => _history;
+        public Dictionary<string, Dictionary<DateTime, string>> GetAllHistory() => HistoryChanges;
 
         /// <summary>
         /// Метод GetHistory возвращает список всех изменений для указанного свойства.
         /// </summary>
         /// <param name="propertyName">Имя изменяемого свойства</param>
         /// <returns>История изменений для указанного свойства</returns>
-        public Dictionary<DateTime, string> GetHistory(string propertyName) => _history[propertyName];
+        public Dictionary<DateTime, string> GetHistoryProperty(string propertyName) => HistoryChanges[propertyName];
 
         /// <summary>
         /// Метод GetValueOnDate возвращает актуальное значение запрашиваемого свойства на запрашиваемую дату или на ближайшую более раннюю найденную дату.
@@ -38,9 +47,9 @@
         /// <param name="propertyName">Имя изменяемого свойства</param>
         /// <param name="date">Запрашиваемая дата</param>
         /// <returns>Значение свойства на запрашиваемую дату</returns>
-        public string GetValueOnDate(string propertyName, DateTime date)
+        public string GetValuePropertyOnDate(string propertyName, DateTime date)
         {
-            if (!_history.TryGetValue(propertyName, out Dictionary<DateTime, string>? value))
+            if (!HistoryChanges.TryGetValue(propertyName, out Dictionary<DateTime, string>? value))
             {
                 // Проверяем, есть ли в истории изменений запрашиваемое свойство.
                 // Если нет, то выбрасывается исключение.
