@@ -1,5 +1,4 @@
 using ArtBot.DataAccessLayer.History;
-using NUnit.Framework;
 using NUnit.Framework.Internal;
 
 
