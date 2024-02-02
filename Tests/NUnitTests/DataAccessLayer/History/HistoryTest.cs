@@ -1,5 +1,4 @@
 using ArtBot.DataAccessLayer.History;
-using Microsoft.VisualBasic;
 using NUnit.Framework.Internal;
 
 
@@ -70,7 +69,7 @@ namespace NUnitTests
                 Assert.That(history.GetHistoryProperty(propertyName2), Is.EqualTo(expectedHistory2));
             });
         }
-                
+
         [Test]
         public void TestGetValuePropertyOnDate()
         {
