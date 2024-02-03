@@ -51,5 +51,10 @@
         /// Он не принимает параметров и просто возвращает список изображений галереи
         /// </summary>
         public List<Picture> GetGallery() => _gallery;
+
+        public void Add(Picture picture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
