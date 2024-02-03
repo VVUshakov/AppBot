@@ -1,5 +1,7 @@
 using ArtBot.DataAccessLayer.Stories;
+using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
+using System;
 
 
 namespace NUnitTests
@@ -13,6 +15,8 @@ namespace NUnitTests
         string propertyName2;
         DateTime dateAndTime1;
         DateTime dateAndTime2;
+        DateTime dateOnly1;
+        DateTime dateOnly2;
         string newValue1;
         string newValue2;
 
@@ -25,6 +29,8 @@ namespace NUnitTests
             propertyName2 = "PropertyName2";
             dateAndTime1 = DateTime.Now;
             dateAndTime2 = DateTime.Now.AddDays(1);
+            DateTime dateOnly1 = dateAndTime1.Date;
+            DateTime dateOnly2 = dateAndTime2.Date;
             newValue1 = "NewValue1";
             newValue2 = "NewValue2";
 
@@ -39,9 +45,11 @@ namespace NUnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(history.HistoryChanges.ContainsKey(propertyName1), Is.True);
-                Assert.That(history.HistoryChanges[propertyName1].ContainsKey(dateAndTime1), Is.True);
-                Assert.That(history.HistoryChanges[propertyName1][dateAndTime1], Is.EqualTo(newValue1));
+                //Assert.That(history.HistoryChanges.ContainsKey(propertyName1), Is.True);
+                //Assert.That(history.HistoryChanges[propertyName1].ContainsKey(dateAndTime1), Is.True);
+                //Assert.That(history.HistoryChanges[propertyName1][dateAndTime1], Is.EqualTo(newValue1));
+                Assert.That(history.GetHistoryProperty(propertyName1).ContainsKey(dateAndTime1), Is.True);
+                Assert.That(history.GetValuePropertyOnDate(propertyName1, dateAndTime1), Is.EqualTo(newValue1));
             });
         }
 
@@ -71,7 +79,7 @@ namespace NUnitTests
         }
 
         [Test]
-        public void TestGetValuePropertyOnDate()
+        public void TestGetValuePropertyOnDateAndTime()
         {
             // Assert
             var expectedValue1 = newValue1;
@@ -82,5 +90,18 @@ namespace NUnitTests
                 Assert.That(history.GetValuePropertyOnDate(propertyName2, dateAndTime2), Is.EqualTo(expectedValue2));
             });
         }
-    }
+
+        [Test]
+        public void TestGetValuePropertyOnDate()
+        {
+            // Assert
+            var expectedValue1 = newValue1;
+            var expectedValue2 = newValue2;
+            Assert.Multiple(() =>
+            {
+                Assert.That(history.GetValuePropertyOnDate(propertyName1, dateOnly1), Is.EqualTo(expectedValue1));
+                Assert.That(history.GetValuePropertyOnDate(propertyName2, dateOnly2), Is.EqualTo(expectedValue2));
+            });
+        }
+    }    
 }
