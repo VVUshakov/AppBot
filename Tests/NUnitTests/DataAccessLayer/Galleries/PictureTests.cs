@@ -63,6 +63,56 @@ namespace NUnitTests.DataAccessLayer.Galleries
             Assert.That(price, Is.EqualTo(decimal.Zero));
         }
 
-    }
+        [Test]
+        public void TestUpdateNameProperty()
+        {
+            // Arrange
+            var newName = "New Name";
 
+            // Act
+            _picture.Name = newName;
+
+            // Assert
+            Assert.That(_picture.Name, Is.EqualTo(newName));
+        }
+
+        [Test]
+        public void TestUpdateDescriptionProperty()
+        {
+            // Arrange
+            var newDescription = "New Description";
+
+            // Act
+            _picture.Description = newDescription;
+
+            // Assert
+            Assert.That(_picture.Description, Is.EqualTo(newDescription));
+        }
+
+        [Test]
+        public void TestUpdateImagePathProperty()
+        {
+            // Arrange
+            var newImagePath = "New Image Path";
+
+            // Act
+            _picture.ImagePath = newImagePath;
+
+            // Assert
+            Assert.That(_picture.ImagePath, Is.EqualTo(newImagePath));
+        }
+
+        [Test]
+        public void TestUpdatePriceProperty()
+        {
+            // Arrange
+            var newPrice = 100m;
+
+            // Act
+            _picture.Price = newPrice;
+
+            // Assert
+            Assert.That(_picture.Price, Is.EqualTo(newPrice));
+        }
+    }
 }
