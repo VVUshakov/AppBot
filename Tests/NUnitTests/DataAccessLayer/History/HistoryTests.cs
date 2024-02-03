@@ -5,7 +5,7 @@ using NUnit.Framework.Internal;
 namespace NUnitTests
 {
     [TestFixture]
-    public class HistoryTest
+    public class HistoryTests
     {
         private History history;
 
