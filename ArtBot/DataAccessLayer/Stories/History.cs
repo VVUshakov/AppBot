@@ -7,7 +7,7 @@
     /// </summary>
     public class History
     {
-        public Dictionary<string, Dictionary<DateTime, string>> HistoryChanges { get; } = [];
+        private Dictionary<string, Dictionary<DateTime, string>> HistoryChanges { get; } = [];
 
         /// <summary>
         /// Метод Add используется для добавления новой пары ключ-значение в историю изменений объекта.
