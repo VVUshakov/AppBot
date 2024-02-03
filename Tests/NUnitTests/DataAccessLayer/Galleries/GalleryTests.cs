@@ -12,6 +12,44 @@ namespace NUnitTests.DataAccessLayer.Galleries
         {
             _gallery = new Gallery();
         }
+        
+        [Test]
+        public void TestRemove()
+        {
+            // Arrange
+            var picture = new Picture();
+            Gallery.Add(picture);
+
+            // Act
+            Gallery.Remove(picture);
+
+            // Assert
+            Assert.That(Gallery.GetGallery(), Does.Not.Contain(picture));
+        }
+        
+        [Test]
+        public void TestClear()
+        {
+            // Arrange
+            var picture = new Picture();
+            Gallery.Add(picture);
+
+            // Act
+            Gallery.Clear();
+
+            // Assert
+            Assert.That(Gallery.GetGallery(), Is.Empty);
+        }
+
+        [Test]
+        public void TestGetGallery()
+        {
+            // Arrange & Act
+            var gallery = Gallery.GetGallery();
+
+            // Assert
+            Assert.That(gallery, Is.Not.Null);
+        }
 
         [Test]
         public void TestAdd()
@@ -20,24 +58,10 @@ namespace NUnitTests.DataAccessLayer.Galleries
             var picture = new Picture();
 
             // Act
-            _gallery.Add(picture);
+            Gallery.Add(picture);
 
             // Assert
-            Assert.That(_gallery.GetGallery(), Contains.Item(picture));
-        }
-
-        [Test]
-        public void TestRemove()
-        {
-            // Arrange
-            var picture = new Picture();
-            _gallery.Add(picture);
-
-            // Act
-            _gallery.Remove(picture);
-
-            // Assert
-            Assert.That(_gallery.GetGallery(), Does.Not.Contain(picture));
+            Assert.That(Gallery.GetGallery(), Contains.Item(picture));
         }
 
         [Test]
@@ -45,39 +69,27 @@ namespace NUnitTests.DataAccessLayer.Galleries
         {
             // Arrange
             var picture = new Picture();
-            _gallery.Add(picture);
-            var updatedPicture = new Picture();
+            Gallery.Add(picture);
+            
+            picture.Name = "TestName";
+            picture.Description = "TestDescription";
+            picture.ImagePath = "TestImagePath";
+            picture.Price = 100m;
+            
+            var updatedPicture = picture;
 
             // Act
-            _gallery.Update(updatedPicture);
+            Gallery.Update(updatedPicture);
 
             // Assert
-            Assert.That(_gallery.GetGallery(), Contains.Item(updatedPicture));
-        }
-
-        [Test]
-        public void TestClear()
-        {
-            // Arrange
-            var picture = new Picture();
-            _gallery.Add(picture);
-
-            // Act
-            _gallery.Clear();
-
-            // Assert
-            Assert.That(_gallery.GetGallery(), Is.Empty);
-        }
-
-        [Test]
-        public void TestGetGallery()
-        {
-            // Arrange & Act
-            var gallery = _gallery.GetGallery();
-
-            // Assert
-            Assert.That(gallery, Is.Not.Null);
+            Assert.That(Gallery.GetGallery(), Contains.Item(updatedPicture));
+            Assert.Multiple(() =>
+            {
+                Assert.That(Gallery.GetGallery().First(p => p.Id == updatedPicture.Id).Name, Is.EqualTo("TestName"));
+                Assert.That(Gallery.GetGallery().First(p => p.Id == updatedPicture.Id).Description, Is.EqualTo("TestDescription"));
+                Assert.That(Gallery.GetGallery().First(p => p.Id == updatedPicture.Id).ImagePath, Is.EqualTo("TestImagePath"));
+                Assert.That(Gallery.GetGallery().First(p => p.Id == updatedPicture.Id).Price, Is.EqualTo(100));
+            });
         }
     }
-
 }

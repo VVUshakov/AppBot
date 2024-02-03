@@ -8,111 +8,91 @@ namespace NUnitTests.DataAccessLayer.Galleries
         private Picture _picture;
 
         [SetUp]
-        public void SetUp()
-        {
-            _picture = new Picture();
-        }
+        public void SetUp() 
+            => _picture = new Picture();
 
         [Test]
         public void TestIdProperty()
-        {
-            // Arrange & Act
-            var id = _picture.Id;
-
-            // Assert
-            Assert.That(id, Is.Not.EqualTo(Guid.Empty));
-        }
+            => Assert.That(_picture.Id, Is.Not.EqualTo(Guid.Empty)); // Assert
 
         [Test]
-        public void TestNameProperty()
-        {
-            // Arrange & Act
-            var name = _picture.Name;
-
-            // Assert
-            Assert.That(name, Is.EqualTo(string.Empty));
-        }
+        public void TestNameProperty() 
+            => Assert.That(_picture.Name, Is.EqualTo(string.Empty)); // Assert
 
         [Test]
         public void TestDescriptionProperty()
-        {
-            // Arrange & Act
-            var description = _picture.Description;
-
-            // Assert
-            Assert.That(description, Is.EqualTo(string.Empty));
-        }
+            => Assert.That(_picture.Description, Is.EqualTo(string.Empty)); // Assert
 
         [Test]
-        public void TestImagePathProperty()
-        {
-            // Arrange & Act
-            var imagePath = _picture.ImagePath;
-
-            // Assert
-            Assert.That(imagePath, Is.EqualTo(string.Empty));
-        }
+        public void TestImagePathProperty() 
+            => Assert.That(_picture.ImagePath, Is.EqualTo(string.Empty)); // Assert
 
         [Test]
-        public void TestPriceProperty()
-        {
-            // Arrange & Act
-            var price = _picture.Price;
-
-            // Assert
-            Assert.That(price, Is.EqualTo(decimal.Zero));
-        }
+        public void TestPriceProperty()         
+            => Assert.That(_picture.Price, Is.EqualTo(decimal.Zero)); // Assert
 
         [Test]
         public void TestUpdateNameProperty()
         {
             // Arrange
-            var newName = "New Name";
+            var newName1 = "New Name1";
+            var newName2 = "New Name2";
 
             // Act
-            _picture.Name = newName;
+            _picture.Name = newName1;
+            _picture.Name = newName2;
 
             // Assert
-            Assert.That(_picture.Name, Is.EqualTo(newName));
+            Assert.That(_picture.Name, Is.Not.EqualTo(newName1));
+            Assert.That(_picture.Name, Is.EqualTo(newName2));
         }
 
         [Test]
         public void TestUpdateDescriptionProperty()
         {
             // Arrange
-            var newDescription = "New Description";
+            var newDescription1 = "New Description1";
+            var newDescription2 = "New Description2";
 
             // Act
-            _picture.Description = newDescription;
+            _picture.Description = newDescription1;
+            _picture.Description = newDescription2;
 
             // Assert
-            Assert.That(_picture.Description, Is.EqualTo(newDescription));
+            Assert.That(_picture.Description, Is.Not.EqualTo(newDescription1));
+            Assert.That(_picture.Description, Is.EqualTo(newDescription2));
         }
 
         [Test]
         public void TestUpdateImagePathProperty()
         {
             // Arrange
-            var newImagePath = "New Image Path";
+            var newImagePath1 = "New Image Path1";
+            var newImagePath2 = "New Image Path2";
 
             // Act
-            _picture.ImagePath = newImagePath;
+            _picture.ImagePath = newImagePath1;
+            _picture.ImagePath = newImagePath2;
 
             // Assert
-            Assert.That(_picture.ImagePath, Is.EqualTo(newImagePath));
+            Assert.That(_picture.ImagePath, Is.Not.EqualTo(newImagePath1));
+            Assert.That(_picture.ImagePath, Is.EqualTo(newImagePath2));
         }
 
         [Test]
         public void TestUpdatePriceProperty()
         {
             // Arrange
-            var newPrice = 100m;
+            var newPrice1 = 100m;
+            var newPrice2 = 200m;
 
             // Act
-            _picture.Price = newPrice;
+            _picture.Price = newPrice1;
+            _picture.Price = newPrice2;
 
             // Assert
-            Assert.That(_picture.Price, Is.EqualTo(newPrice));
+            Assert.That(_picture.Price, Is.Not.EqualTo(newPrice1));
+            Assert.That(_picture.Price, Is.EqualTo(newPrice2));
         }
     }
 }
