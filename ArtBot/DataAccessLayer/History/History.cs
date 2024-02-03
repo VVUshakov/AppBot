@@ -4,7 +4,7 @@
     /// Этот класс может быть использован для отслеживания изменений в объекте другого класса. 
     /// Для этого вы должны создать экземпляр класса ChangeHistory в отслеживаемом классе
     /// и вызвать метод Add каждый раз, когда значение свойства объекта изменяется.
-    /// /// </summary>
+    /// </summary>
     public class History
     {
         public Dictionary<string, Dictionary<DateTime, string>> HistoryChanges { get; } = [];
