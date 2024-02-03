@@ -52,9 +52,9 @@
         /// </summary>
         public List<Picture> GetGallery() => _gallery;
 
-        public void Add(Picture picture)
+        public void Add(Picture item)
         {
-            throw new NotImplementedException();
+            _gallery.Add(item);
         }
     }
 }
