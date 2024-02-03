@@ -1,4 +1,4 @@
-﻿namespace ArtBot.DataAccessLayer.History
+﻿namespace ArtBot.DataAccessLayer.Stories
 {
     /// <summary>
     /// В этом интерфейсе определено свойство History, которое возвращает объект класса History. 

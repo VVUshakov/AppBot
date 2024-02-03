@@ -1,4 +1,4 @@
-﻿namespace ArtBot.DataAccessLayer.History
+﻿namespace ArtBot.DataAccessLayer.Stories
 {
     /// <summary>
     /// Этот класс может быть использован для отслеживания изменений в объекте другого класса. 
