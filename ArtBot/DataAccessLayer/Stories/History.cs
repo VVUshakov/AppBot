@@ -1,13 +1,13 @@
-﻿namespace ArtBot.DataAccessLayer.History
+﻿namespace ArtBot.DataAccessLayer.Stories
 {
     /// <summary>
     /// Этот класс может быть использован для отслеживания изменений в объекте другого класса. 
     /// Для этого вы должны создать экземпляр класса ChangeHistory в отслеживаемом классе
     /// и вызвать метод Add каждый раз, когда значение свойства объекта изменяется.
-    /// /// </summary>
+    /// </summary>
     public class History
     {
-        public Dictionary<string, Dictionary<DateTime, string>> HistoryChanges { get; } = [];
+        private Dictionary<string, Dictionary<DateTime, string>> HistoryChanges { get; } = [];
 
         /// <summary>
         /// Метод Add используется для добавления новой пары ключ-значение в историю изменений объекта.
