@@ -1,7 +1,5 @@
 using ArtBot.DataAccessLayer.Stories;
-using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
-using System;
 
 
 namespace NUnitTests
@@ -45,9 +43,9 @@ namespace NUnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                //Assert.That(history.HistoryChanges.ContainsKey(propertyName1), Is.True);
-                //Assert.That(history.HistoryChanges[propertyName1].ContainsKey(dateAndTime1), Is.True);
-                //Assert.That(history.HistoryChanges[propertyName1][dateAndTime1], Is.EqualTo(newValue1));
+                //Assert.That(history.HistoryChanges.ContainsKey(propertyName1), Is.True); //private HistoryChanges
+                //Assert.That(history.HistoryChanges[propertyName1].ContainsKey(dateAndTime1), Is.True); //private HistoryChanges
+                //Assert.That(history.HistoryChanges[propertyName1][dateAndTime1], Is.EqualTo(newValue1)); //private HistoryChanges
                 Assert.That(history.GetHistoryProperty(propertyName1).ContainsKey(dateAndTime1), Is.True);
                 Assert.That(history.GetValuePropertyOnDate(propertyName1, dateAndTime1), Is.EqualTo(newValue1));
             });
@@ -103,5 +101,5 @@ namespace NUnitTests
                 Assert.That(history.GetValuePropertyOnDate(propertyName2, dateOnly2), Is.EqualTo(expectedValue2));
             });
         }
-    }    
+    }
 }

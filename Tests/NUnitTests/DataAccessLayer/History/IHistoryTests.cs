@@ -21,17 +21,27 @@ namespace NUnitTests
         {
             // Arrange
             var history = new History();
-            var historyInterface = new HistoryImplementation(history);
+            var historyInterface1 = new HistoryImplementation1();
+            var historyInterface2 = new HistoryImplementation2(history);
 
             // Act
-            var historyProperty = historyInterface.History;
+            var historyProperty1 = historyInterface1.History;
+            var historyProperty2 = historyInterface2.History;
 
             // Assert
-            Assert.That(historyProperty, Is.Not.Null);
+            Assert.That(historyProperty1, Is.Not.Null);
+            Assert.That(historyProperty2, Is.Not.Null);
         }
     }
 
-    public class HistoryImplementation(History history) : IHistory
+    public class HistoryImplementation1 : IHistory
+    {
+        private readonly History _history = new();
+
+        public History History => _history;
+    }
+
+    public class HistoryImplementation2(History history) : IHistory
     {
         private readonly History _history = history;
 
