@@ -77,10 +77,14 @@ namespace ArtBot
         }        
         private static string GetTelegramToken()
         {
+            return "5444180316:AAEpdTcCRvULvqFIXd0BP1Kf-UnzmAo_dBo";
+
+            /*
             DotNetEnv.Env.Load();
             var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") 
                 ?? throw new InvalidOperationException("Нет валидного токена для Telegram.");
             return telegramToken;
+            */
         }
 
         private static IBotService GetBotService(BotType botType)
