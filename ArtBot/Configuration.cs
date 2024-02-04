@@ -1,9 +1,17 @@
 ﻿using ArtBot.Services;
+using ArtBot.Services.AuthService;
 using ArtBot.Services.BotServices;
 using ArtBot.Services.BotServices.TG;
 using ArtBot.Services.BotServices.Viber;
 using ArtBot.Services.BotServices.VK;
 using ArtBot.Services.BotServices.WhatsApp;
+using ArtBot.Services.DatabaseProcessor;
+using ArtBot.Services.LoggingService;
+using ArtBot.Services.MessageHandlingService;
+using ArtBot.Services.NotificationService;
+using ArtBot.Services.RequestHandlerService;
+using ArtBot.Services.ResponseService;
+using ArtBot.Services.WebhookService;
 
 
 namespace ArtBot
@@ -15,86 +23,57 @@ namespace ArtBot
     {
         public readonly List<IBotService> ListBots;
         public readonly List<IService> ListServices;
-        public readonly string TokenTG;
+        //public readonly string TokenTG;
 
         public Configuration()
         {
             ListBots = GetListBots();
             ListServices = GetListServices(ListBots);
-            TokenTG = GetTelegramToken();
+
             //добавить другие элементы конфигурации, предварительно добавив свойство в класс
         }
+
+        /// <summary>
+        /// Создание списка экземпляров ботов
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         private static List<IBotService> GetListBots()
         {
-            return 
-                [ 
-                    new TelegramBot(), 
-                    /*
-                     * new VKBot(), 
-                     * new ViberBot(), 
-                     * new WhatsAppBot()
-                     */ 
-                ];
-
-            /*
-            // Создание списка экземпляров ботов
             var listBots = new List<IBotService>();
             listBots.AddRange(Enum.GetValues(typeof(BotType))
                     .Cast<BotType>()
                     .Select(GetBotService));
-            if (listBots.Count !> 0) 
+            if (listBots.Count <= 0) 
                 throw new InvalidOperationException("Нет подписанных ботов для загрузки.");
             return listBots;
-            */
+            
         }
-        private static List<IService> GetListServices(List<IBotService> listBots)
-        {
-            return 
-                [
-                    new BotService(listBots),
-                    /*
-                     * new ResponseService(), 
-                     * new MessageHandlingService(), 
-                     * new LoggingService()
-                     * new DatabaseProcessor()
-                     * new WebhookService()
-                     * new AuthService()
-                     * new NotificationService()
-                     * new RequestHandlerService()
-                     */
-                ];
 
-            /*
-            // Создание списка экземпляров сервисов
+        /// <summary>
+        /// Создание списка экземпляров сервисов
+        /// </summary>
+        /// <param name="listBots"></param>
+        /// <returns></returns>
+        private static List<IService> GetListServices(List<IBotService> listBots)
+        {   
             var listServices = new List<IService>();
             listServices.AddRange(Enum.GetValues(typeof(ServiceType))
                 .Cast<ServiceType>()
                 .Select(serviceType => GetService(serviceType, listBots)));
-            if (listServices.Count !> 0) 
+            if (listServices.Count <= 0) 
                 throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
-            return listServices;
-            */
-        }        
-        private static string GetTelegramToken()
-        {
-            return "5444180316:AAEpdTcCRvULvqFIXd0BP1Kf-UnzmAo_dBo";
-
-            /*
-            DotNetEnv.Env.Load();
-            var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") 
-                ?? throw new InvalidOperationException("Нет валидного токена для Telegram.");
-            return telegramToken;
-            */
+            return listServices;            
         }
-
+                
         private static IBotService GetBotService(BotType botType)
         {
             return botType switch
             {
                 BotType.Telegram => new TelegramBot(),
-                /*//BotType.VK => new VKBot(),
-                  //BotType.Viber => new ViberBot(),
-                  //BotType.WhatsApp => new WhatsAppBot(),*/
+                BotType.VK => new VKBot(),
+                BotType.Viber => new ViberBot(),
+                BotType.WhatsApp => new WhatsAppBot(),
                 _ => throw new ArgumentOutOfRangeException(),
             };
         }
@@ -103,14 +82,14 @@ namespace ArtBot
             return serviceType switch
             {
                 ServiceType.BotService => new BotService(listBots),
-                /*//case ServiceType.ResponseService: return new ResponseService();
-                  //case ServiceType.MessageHandlingService: return new MessageHandlingService();
-                  //case ServiceType.LoggingService: return new LoggingService();
-                  //case ServiceType.DatabaseProcessor: return new DatabaseProcessor();
-                  //case ServiceType.WebhookService: return new WebhookService();
-                  //case ServiceType.AuthService: return new AuthService();
-                  //case ServiceType.NotificationService: return new NotificationService();
-                  //case ServiceType.RequestHandlerService: return new RequestHandlerService();*/
+                ServiceType.ResponseService => new ResponseService(),
+                ServiceType.MessageHandlingService => new MessageHandlingService(),
+                ServiceType.LoggingService => new LoggingService(),
+                ServiceType.DatabaseProcessor => new DatabaseProcessor(),
+                ServiceType.WebhookService => new WebhookService(),
+                ServiceType.AuthService => new AuthService(),
+                ServiceType.NotificationService => new NotificationService(),
+                ServiceType.RequestHandlerService => new RequestHandlerService(),
                 _ => throw new ArgumentOutOfRangeException(),
             };
         }

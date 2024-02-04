@@ -8,9 +8,9 @@ namespace ArtBot.Services
     /// Метод StartAsync запускает все сервисы приложения, используя метод Task.WhenAll. 
     /// Поле со списком сервисов инициализируется через входной параметр конструктора класса.
     /// </summary>
-    public class Service(List<IBotService> listServices) : IService
+    public class Service(List<IService> listServices) : IService
     {
-        public List<IBotService> ListServices { get; } = listServices;
+        public List<IService> ListServices { get; } = listServices;
 
         public Task StartAsync() => Task.WhenAll(ListServices.Select(s => s.StartAsync()));
     }

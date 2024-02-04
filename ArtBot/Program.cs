@@ -1,4 +1,5 @@
 ﻿using ArtBot;
+using ArtBot.Services;
 using Telegram.Bot;
 
 
@@ -15,12 +16,21 @@ class Program
     {
         // Сконфигурировать параметры загрузки приложения
         var configuration = new Configuration();
+
+        IService services = new Service(configuration.ListServices);
+        await services.StartAsync();
+
+
+
+        /*
+        // Сконфигурировать параметры загрузки приложения
+        var configuration = new Configuration();
         // Создать экземпляр Бота
         var botClient = new TelegramBotClient(configuration.TokenTG);
         // Получить сведения о боте и вывести в консоль
         var me = await botClient.GetMeAsync();
         Console.WriteLine($"Привет, Мир! Я бот {me.Id} и меня зовут {me.FirstName}.");
-
+        */
 
 
 

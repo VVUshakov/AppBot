@@ -4,7 +4,10 @@
     {
         public Task StartAsync()
         {
-            throw new NotImplementedException();
+            //TODO: заглушка
+
+            Console.WriteLine("ViberBot запущен.");
+            return Task.CompletedTask;
         }
     }
 }
