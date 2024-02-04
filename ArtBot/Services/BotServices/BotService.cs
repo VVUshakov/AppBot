@@ -1,11 +1,16 @@
 ﻿namespace ArtBot.Services.BotServices
 {
-    public class BotService : IBotService
+    /// <summary>
+    /// Класс BotService, реализует интерфейс IService. 
+    /// Класс содержит поле List<IBotService> _listBots, которое используется для хранения списка ботов сервиса (Telegram, VK, Viber, WhatsApp). 
+    /// Метод StartAsync запускает все боты, используя метод Task.WhenAll. 
+    /// Метод AddService позволяет добавлять нового бота в список.
+    /// </summary>
+    public class BotService : IService
     {
-        public Task StartAsync()
-        {
-            throw new NotImplementedException();
-            // TODO: реализовать код запуска всех имеющихся/необходимых ботов (Telegram, VK, Viber, WhatsApp и т.п.)
-        }
+        private readonly List<IBotService> _listBots = [];
+
+        public Task StartAsync() => Task.WhenAll(_listBots.Select(s => s.StartAsync()));
+        public void AddService(IBotService botService) => _listBots.Add(botService);
     }
 }

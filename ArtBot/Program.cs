@@ -1,5 +1,5 @@
 ﻿using ArtBot.Services.BotServices;
-using ArtBot.Services.BotServices.TG;
+
 
 /// <summary>
 /// В этом примере класс Program реализует точку входа приложения, в которой создаются экземпляры всех сервисов и запускаются их методы StartAsync. 
