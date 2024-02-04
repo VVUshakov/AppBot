@@ -6,13 +6,12 @@ namespace ArtBot.Services
     /// Класс AppService, реализует интерфейс IService. 
     /// Класс содержит поле List<IService> _listServices, которое используется для хранения списка сервисов. 
     /// Метод StartAsync запускает все сервисы приложения, используя метод Task.WhenAll. 
-    /// Метод AddService позволяет добавлять новые сервисы в список.
+    /// Поле со списком сервисов инициализируется через входной параметр конструктора класса.
     /// </summary>
-    public class AppService : IService
+    public class AppService(List<IBotService> listServices) : IService
     {
-        private readonly List<IBotService> _listServices = [];
+        private readonly List<IBotService> _listServices = listServices;
 
         public Task StartAsync() => Task.WhenAll(_listServices.Select(s => s.StartAsync()));
-        public void AddService(IBotService service) => _listServices.Add(service);
     }
 }

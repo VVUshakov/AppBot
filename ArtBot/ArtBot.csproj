@@ -11,10 +11,4 @@
     <PackageReference Include="Telegram.Bot" Version="19.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\BotServices\VK\" />
-    <Folder Include="Services\BotServices\Viber\" />
-    <Folder Include="Services\BotServices\WhatsApp\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,6 @@
-﻿namespace ArtBot.Services.BotServices.TG
+﻿namespace ArtBot.Services.BotServices.Viber
 {
-    public class TelegramBot : IBotService
+    public class ViberBot : IBotService
     {
         public Task StartAsync()
         {

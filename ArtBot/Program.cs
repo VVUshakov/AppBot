@@ -1,4 +1,7 @@
-﻿using ArtBot.Services.BotServices;
+﻿using ArtBot.Services;
+using ArtBot.Services.BotServices;
+using ArtBot.Services.BotServices.TG;
+using System.Collections.Generic;
 
 
 /// <summary>
@@ -12,18 +15,25 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Создание экземпляров сервисов
-        var botService = new BotService(); // Базовый класс для обработки сообщений и команд из Telegram        
-        /*
-        //var responseService = new ResponseService(); // 
-        //var messageHandlingService = new MessageHandlingService(); // 
-        //var loggingService = new LoggingService(); // 
-        //var databaseProcessor = new DatabaseProcessor(); // 
-        //var webhookService = new WebhookService(); // 
-        //var authService = new AuthService(); // 
-        //var notificationService = new NotificationService(); // 
-        //var requestHandlerService = new RequestHandlerService(); //
-        */
+        // Создание списка экземпляров ботов
+        var listBots = new List<IBotService>();
+
+        listBots.AddRange(Enum.GetValues(typeof(BotType))
+                .Cast<BotType>()
+                .Select(botType => GetBotService(botType)));
+
+        // Создание списка экземпляров сервисов
+        var listServices = new List<IService>();
+
+        listServices.AddRange(Enum.GetValues(typeof(ServiceType))
+            .Cast<ServiceType>()
+            .Select(serviceType => GetService(serviceType, listBots)));
+
+
+
+
+
+        var botService = new BotService();
 
         // Запуск сервисов
         await botService.StartAsync();
@@ -45,6 +55,35 @@ class Program
         // Обработка запроса
         //await requestHandlerService.HandleRequestAsync(request);
         */
+    }
+
+    private static IBotService GetBotService(BotType botType)
+    {
+        return botType switch
+        {
+            BotType.Telegram => new TelegramBot(),
+          /*//BotType.VK => new VKBot(),
+            //BotType.Viber => new ViberBot(),
+            //BotType.WhatsApp => new WhatsAppBot(),*/
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+    }
+
+    private static IService GetService(ServiceType serviceType, List<IBotService> listBots)
+    {
+        return serviceType switch
+        {
+            ServiceType.BotService => new BotService(listBots),
+          /*//case ServiceType.ResponseService: return new ResponseService();
+            //case ServiceType.MessageHandlingService: return new MessageHandlingService();
+            //case ServiceType.LoggingService: return new LoggingService();
+            //case ServiceType.DatabaseProcessor: return new DatabaseProcessor();
+            //case ServiceType.WebhookService: return new WebhookService();
+            //case ServiceType.AuthService: return new AuthService();
+            //case ServiceType.NotificationService: return new NotificationService();
+            //case ServiceType.RequestHandlerService: return new RequestHandlerService();*/
+            _ => throw new ArgumentOutOfRangeException(),
+        };
     }
 
     static async Task<string> GetRequestFromClientAsync()

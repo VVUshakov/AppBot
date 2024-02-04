@@ -4,13 +4,12 @@
     /// Класс BotService, реализует интерфейс IService. 
     /// Класс содержит поле List<IBotService> _listBots, которое используется для хранения списка ботов сервиса (Telegram, VK, Viber, WhatsApp). 
     /// Метод StartAsync запускает все боты, используя метод Task.WhenAll. 
-    /// Метод AddService позволяет добавлять нового бота в список.
+    /// Поле со списком ботов инициализируется через входной параметр конструктора класса
     /// </summary>
-    public class BotService : IService
+    public class BotService(List<IBotService> listBots) : IService
     {
-        private readonly List<IBotService> _listBots = [];
+        private readonly List<IBotService> _listBots = listBots;
 
         public Task StartAsync() => Task.WhenAll(_listBots.Select(s => s.StartAsync()));
-        public void AddService(IBotService botService) => _listBots.Add(botService);
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace ArtBot.Services.BotServices.TG
+﻿namespace ArtBot.Services.BotServices.WhatsApp
 {
-    public class TelegramBot : IBotService
+    public class WhatsAppBot : IBotService
     {
         public Task StartAsync()
         {
