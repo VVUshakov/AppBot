@@ -1,8 +1,44 @@
 ﻿using Telegram.Bot;
 
 
-const string YOUR_ACCESS_TOKEN_HERE = "5444180316:AAGOxZcjbNWrf7uyCtTJ7nTVlG_zE4MIU44";
-var botClient = new TelegramBotClient(YOUR_ACCESS_TOKEN_HERE);
+/// <summary>
+/// В этом примере класс Program реализует точку входа приложения, в которой создаются экземпляры всех сервисов и запускаются их методы StartAsync. 
+/// Затем приложение получает входящий запрос от клиента с помощью метода GetRequestFromClientAsync и передает его в сервис RequestHandlerService для обработки.
+/// Метод GetRequestFromClientAsync представляет собой точку взаимодействия с клиентом и может быть реализован с использованием соответствующих средств коммуникации, 
+/// таких как HTTP-сервер, TCP-сокеты или другие методы обмена данными.
+/// </summary>
+/// <param name="args"></param>
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // Создание экземпляров сервисов
+        var botService = new BotService();
+        var responseService = new ResponseService();
+        var webhookService = new WebhookService();
+        var authService = new AuthService();
+        var notificationService = new NotificationService();
+        var requestHandlerService = new RequestHandlerService();
 
-var me = await botClient.GetMeAsync();
-Console.WriteLine($"Hello, World! I am user {me.Id} and my name is {me.FirstName}.");
+        // Запуск сервисов
+        await botService.StartAsync();
+        await responseService.StartAsync();
+        await webhookService.StartAsync();
+        await authService.StartAsync();
+        await notificationService.StartAsync();
+        await requestHandlerService.StartAsync();
+
+        // Получение входящего запроса от клиента
+        string request = await GetRequestFromClientAsync();
+
+        // Обработка запроса
+        await requestHandlerService.HandleRequestAsync(request);
+    }
+
+    static async Task<string> GetRequestFromClientAsync()
+    {
+        // Взаимодействие с клиентом для получения входящего запроса
+        // ...
+        return "REQUEST";
+    }
+}
