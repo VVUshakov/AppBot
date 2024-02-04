@@ -1,7 +1,7 @@
-﻿using ArtBot.Services.BotServices;
-using ArtBot.Services;
+﻿using ArtBot.Services;
+using ArtBot.Services.BotServices;
 using ArtBot.Services.BotServices.TG;
-using System.Collections.Generic;
+
 
 namespace ArtBot
 {
@@ -10,31 +10,46 @@ namespace ArtBot
     /// </summary>
     internal class Configuration
     {
-        public static List<IService> listServices;
+        public required List<IBotService> ListBot;
+        public required List<IService> ListServices;
+        public required string TokenTG;
 
-        public static void Build()
+
+        public Configuration()
         {
-            listServices = GetListStartedServices();
+            SetListBots();
+            SetListServices();
+            SetTelegramToken();
+            //добавить другие элементы конфигурации, предварительно добавив свойсво в класс
         }
-
-        private static List<IService> GetListStartedServices()
-        {   
+        private void SetListBots()
+        {
             // Создание списка экземпляров ботов
             var listBots = new List<IBotService>();
-
             listBots.AddRange(Enum.GetValues(typeof(BotType))
                     .Cast<BotType>()
                     .Select(GetBotService));
-
+            if (listBots.Count > 0) ListBot = listBots;
+            else throw new InvalidOperationException("Нет подписанных ботов для загрузки.");
+        }
+        private void SetListServices()
+        {
             // Создание списка экземпляров сервисов
             var listServices = new List<IService>();
-
             listServices.AddRange(Enum.GetValues(typeof(ServiceType))
                 .Cast<ServiceType>()
-                .Select(serviceType => GetService(serviceType, listBots)));
-
-            return listServices;
+                .Select(serviceType => GetService(serviceType, ListBot)));
+            if (listServices.Count > 0) ListServices = listServices;
+            else throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
+        }        
+        private void SetTelegramToken()
+        {
+            DotNetEnv.Env.Load();
+            var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
+            if (telegramToken != null) TokenTG = telegramToken;
+            else throw new InvalidOperationException("Нет валидного токена для Telegram.");
         }
+
 
         private static IBotService GetBotService(BotType botType)
         {

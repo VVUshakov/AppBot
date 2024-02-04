@@ -1,7 +1,4 @@
 ﻿using ArtBot;
-using ArtBot.Services;
-using ArtBot.Services.BotServices;
-using ArtBot.Services.BotServices.TG;
 
 
 /// <summary>
@@ -17,8 +14,6 @@ class Program
     {
         //Сконфигурировать параметры загрузки приложения
         var appConfiguration = new Configuration();
-
-        
 
 
 
@@ -48,7 +43,7 @@ class Program
         */
     }
 
-    
+
 
     static async Task<string> GetRequestFromClientAsync()
     {
