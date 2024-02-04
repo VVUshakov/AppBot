@@ -10,46 +10,46 @@ namespace ArtBot
     /// </summary>
     internal class Configuration
     {
-        public required List<IBotService> ListBot;
-        public required List<IService> ListServices;
-        public required string TokenTG;
-
+        public readonly List<IBotService> ListBots;
+        public readonly List<IService> ListServices;
+        public readonly string TokenTG;
 
         public Configuration()
         {
-            SetListBots();
-            SetListServices();
-            SetTelegramToken();
-            //добавить другие элементы конфигурации, предварительно добавив свойсво в класс
+            ListBots = GetListBots();
+            ListServices = GetListServices(ListBots);
+            TokenTG = GetTelegramToken();
+            //добавить другие элементы конфигурации, предварительно добавив свойство в класс
         }
-        private void SetListBots()
+        private static List<IBotService> GetListBots()
         {
             // Создание списка экземпляров ботов
             var listBots = new List<IBotService>();
             listBots.AddRange(Enum.GetValues(typeof(BotType))
                     .Cast<BotType>()
                     .Select(GetBotService));
-            if (listBots.Count > 0) ListBot = listBots;
-            else throw new InvalidOperationException("Нет подписанных ботов для загрузки.");
+            if (listBots.Count !> 0) 
+                throw new InvalidOperationException("Нет подписанных ботов для загрузки.");
+            return listBots;
         }
-        private void SetListServices()
+        private static List<IService> GetListServices(List<IBotService> listBots)
         {
             // Создание списка экземпляров сервисов
             var listServices = new List<IService>();
             listServices.AddRange(Enum.GetValues(typeof(ServiceType))
                 .Cast<ServiceType>()
-                .Select(serviceType => GetService(serviceType, ListBot)));
-            if (listServices.Count > 0) ListServices = listServices;
-            else throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
+                .Select(serviceType => GetService(serviceType, listBots)));
+            if (listServices.Count !> 0) 
+                throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
+            return listServices;
         }        
-        private void SetTelegramToken()
+        private static string GetTelegramToken()
         {
             DotNetEnv.Env.Load();
-            var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
-            if (telegramToken != null) TokenTG = telegramToken;
-            else throw new InvalidOperationException("Нет валидного токена для Telegram.");
+            var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") ?? 
+                throw new InvalidOperationException("Нет валидного токена для Telegram.");
+            return telegramToken;
         }
-
 
         private static IBotService GetBotService(BotType botType)
         {
@@ -59,7 +59,7 @@ namespace ArtBot
                 /*//BotType.VK => new VKBot(),
                   //BotType.Viber => new ViberBot(),
                   //BotType.WhatsApp => new WhatsAppBot(),*/
-                _ => throw new ArgumentOutOfRangeException(),
+                //_ => throw new ArgumentOutOfRangeException(),
             };
         }
         private static IService GetService(ServiceType serviceType, List<IBotService> listBots)
@@ -75,7 +75,7 @@ namespace ArtBot
                   //case ServiceType.AuthService: return new AuthService();
                   //case ServiceType.NotificationService: return new NotificationService();
                   //case ServiceType.RequestHandlerService: return new RequestHandlerService();*/
-                _ => throw new ArgumentOutOfRangeException(),
+                //_ => throw new ArgumentOutOfRangeException(),
             };
         }
     }
