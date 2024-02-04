@@ -1,4 +1,6 @@
 ﻿namespace ArtBot.Services.BotServices
 {
-    public interface IBotService {}
+    public interface IBotService: IService 
+    {
+    }
 }
