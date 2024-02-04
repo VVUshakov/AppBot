@@ -1,6 +1,9 @@
 ﻿using ArtBot.Services;
 using ArtBot.Services.BotServices;
 using ArtBot.Services.BotServices.TG;
+using ArtBot.Services.BotServices.Viber;
+using ArtBot.Services.BotServices.VK;
+using ArtBot.Services.BotServices.WhatsApp;
 
 
 namespace ArtBot
@@ -23,6 +26,17 @@ namespace ArtBot
         }
         private static List<IBotService> GetListBots()
         {
+            return 
+                [ 
+                    new TelegramBot(), 
+                    /*
+                     * new VKBot(), 
+                     * new ViberBot(), 
+                     * new WhatsAppBot()
+                     */ 
+                ];
+
+            /*
             // Создание списка экземпляров ботов
             var listBots = new List<IBotService>();
             listBots.AddRange(Enum.GetValues(typeof(BotType))
@@ -31,9 +45,26 @@ namespace ArtBot
             if (listBots.Count !> 0) 
                 throw new InvalidOperationException("Нет подписанных ботов для загрузки.");
             return listBots;
+            */
         }
         private static List<IService> GetListServices(List<IBotService> listBots)
         {
+            return 
+                [
+                    new BotService(listBots),
+                    /*
+                     * new ResponseService(), 
+                     * new MessageHandlingService(), 
+                     * new LoggingService()
+                     * new DatabaseProcessor()
+                     * new WebhookService()
+                     * new AuthService()
+                     * new NotificationService()
+                     * new RequestHandlerService()
+                     */
+                ];
+
+            /*
             // Создание списка экземпляров сервисов
             var listServices = new List<IService>();
             listServices.AddRange(Enum.GetValues(typeof(ServiceType))
@@ -42,12 +73,13 @@ namespace ArtBot
             if (listServices.Count !> 0) 
                 throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
             return listServices;
+            */
         }        
         private static string GetTelegramToken()
         {
             DotNetEnv.Env.Load();
-            var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") ?? 
-                throw new InvalidOperationException("Нет валидного токена для Telegram.");
+            var telegramToken = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") 
+                ?? throw new InvalidOperationException("Нет валидного токена для Telegram.");
             return telegramToken;
         }
 
@@ -59,7 +91,7 @@ namespace ArtBot
                 /*//BotType.VK => new VKBot(),
                   //BotType.Viber => new ViberBot(),
                   //BotType.WhatsApp => new WhatsAppBot(),*/
-                //_ => throw new ArgumentOutOfRangeException(),
+                _ => throw new ArgumentOutOfRangeException(),
             };
         }
         private static IService GetService(ServiceType serviceType, List<IBotService> listBots)
@@ -75,7 +107,7 @@ namespace ArtBot
                   //case ServiceType.AuthService: return new AuthService();
                   //case ServiceType.NotificationService: return new NotificationService();
                   //case ServiceType.RequestHandlerService: return new RequestHandlerService();*/
-                //_ => throw new ArgumentOutOfRangeException(),
+                _ => throw new ArgumentOutOfRangeException(),
             };
         }
     }
