@@ -23,12 +23,11 @@ namespace ArtBot
     {
         public readonly List<IBotService> ListBots;
         public readonly List<IService> ListServices;
-        //public readonly string TokenTG;
 
         public Configuration()
         {
             ListBots = GetListBots();
-            ListServices = GetListServices(ListBots);
+            ListServices = GetListServices();
 
             //добавить другие элементы конфигурации, предварительно добавив свойство в класс
         }
@@ -38,7 +37,7 @@ namespace ArtBot
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        private static List<IBotService> GetListBots()
+        private List<IBotService> GetListBots()
         {
             var listBots = new List<IBotService>();
             listBots.AddRange(Enum.GetValues(typeof(BotType))
@@ -49,24 +48,23 @@ namespace ArtBot
             return listBots;
             
         }
-
         /// <summary>
         /// Создание списка экземпляров сервисов
         /// </summary>
         /// <param name="listBots"></param>
         /// <returns></returns>
-        private static List<IService> GetListServices(List<IBotService> listBots)
+        private List<IService> GetListServices()
         {   
             var listServices = new List<IService>();
             listServices.AddRange(Enum.GetValues(typeof(ServiceType))
                 .Cast<ServiceType>()
-                .Select(serviceType => GetService(serviceType, listBots)));
+                .Select(GetService));
             if (listServices.Count <= 0) 
                 throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
             return listServices;            
         }
                 
-        private static IBotService GetBotService(BotType botType)
+        private IBotService GetBotService(BotType botType)
         {
             return botType switch
             {
@@ -77,11 +75,11 @@ namespace ArtBot
                 _ => throw new ArgumentOutOfRangeException(),
             };
         }
-        private static IService GetService(ServiceType serviceType, List<IBotService> listBots)
+        private IService GetService(ServiceType serviceType)
         {
             return serviceType switch
             {
-                ServiceType.BotService => new BotService(listBots),
+                ServiceType.BotService => new BotService(ListBots),
                 ServiceType.ResponseService => new ResponseService(),
                 ServiceType.MessageHandlingService => new MessageHandlingService(),
                 ServiceType.LoggingService => new LoggingService(),
