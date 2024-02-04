@@ -15,14 +15,14 @@ class Program
         // Создание экземпляров сервисов
         var botService = new BotService(); // Базовый класс для обработки сообщений и команд из Telegram        
         /*
-        //var responseService = new ResponseService(); // Сервис отправки ответов и выполнения сценариев: этот сервис отвечает за отправку ответов на сообщения пользователей и выполнение сценариев, определенных в приложении
-        //var messageHandlingService = new MessageHandlingService(); // Сервис обработки сообщений и команд: этот сервис отвечает за обработку входящих сообщений и команд от пользователей.
-        //var loggingService = new LoggingService(); // Сервис логирования действий пользователей: этот сервис отвечает за запись действий пользователей в журнал или базу данных
-        //var databaseProcessor = new DatabaseProcessor(); // Сервис обработки баз данных: этот сервис отвечает за взаимодействие с базой данных. Может включать в себя функциональность для создания, чтения, обновления и удаления данных в базе данных
-        //var webhookService = new WebhookService(); // Сервис обработки вебхуков: этот сервис отвечает за обработку вебхуков, которые могут быть использованы для взаимодействия с другими системами или платформами
-        //var authService = new AuthService(); // Сервис обработки платежей: этот сервис отвечает за обработку платежей, связанных с использованием бота.
-        //var notificationService = new NotificationService(); // Служба уведомлений: этот сервис отвечает за инфоррование пользователей
-        //var requestHandlerService = new RequestHandlerService(); //Сервис обработки аутентификации и авторизации: этот сервис отвечает за аутентификацию пользователей и управление их правами доступа к функциональности бота
+        //var responseService = new ResponseService(); // 
+        //var messageHandlingService = new MessageHandlingService(); // 
+        //var loggingService = new LoggingService(); // 
+        //var databaseProcessor = new DatabaseProcessor(); // 
+        //var webhookService = new WebhookService(); // 
+        //var authService = new AuthService(); // 
+        //var notificationService = new NotificationService(); // 
+        //var requestHandlerService = new RequestHandlerService(); //
         */
 
         // Запуск сервисов
