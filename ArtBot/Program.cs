@@ -1,6 +1,5 @@
 ﻿using ArtBot;
 using ArtBot.Services;
-using Telegram.Bot;
 
 
 /// <summary>
@@ -17,37 +16,11 @@ class Program
         // Сконфигурировать параметры загрузки приложения
         var configuration = new Configuration();
 
+        // Запустить все сервисы и боты
         IService services = new Service(configuration.ListServices);
         await services.StartAsync();
 
 
-
-        /*
-        // Сконфигурировать параметры загрузки приложения
-        var configuration = new Configuration();
-        // Создать экземпляр Бота
-        var botClient = new TelegramBotClient(configuration.TokenTG);
-        // Получить сведения о боте и вывести в консоль
-        var me = await botClient.GetMeAsync();
-        Console.WriteLine($"Привет, Мир! Я бот {me.Id} и меня зовут {me.FirstName}.");
-        */
-
-
-
-        //var botService = new BotService();
-
-        // Запуск сервисов
-        //await botService.StartAsync();
-        /*
-        //await responseService.StartAsync();
-        //await messageHandlingService.StartAsync();
-        //await loggingService.StartAsync();
-        //await databaseProcessor.StartAsync();
-        //await webhookService.StartAsync();
-        //await authService.StartAsync();
-        //await notificationService.StartAsync();
-        //await requestHandlerService.StartAsync();
-        */
 
         // Получение входящего запроса от клиента
         string request = await GetRequestFromClientAsync();
@@ -57,8 +30,6 @@ class Program
         //await requestHandlerService.HandleRequestAsync(request);
         */
     }
-
-
 
     static async Task<string> GetRequestFromClientAsync()
     {
