@@ -10,7 +10,7 @@ class Program
     static async Task Main(string[] args)
     {
         // Создание экземпляров сервисов
-        var botService = new BotService(); // Базовый класс для обработки сообщений и команд из Telegram
+        var botService = new IBotService(); // Базовый класс для обработки сообщений и команд из Telegram
         //var responseService = new ResponseService(); // Сервис отправки ответов и выполнения сценариев: этот сервис отвечает за отправку ответов на сообщения пользователей и выполнение сценариев, определенных в приложении
         //var messageHandlingService = new MessageHandlingService(); // Сервис обработки сообщений и команд: этот сервис отвечает за обработку входящих сообщений и команд от пользователей.
         //var loggingService = new LoggingService(); // Сервис логирования действий пользователей: этот сервис отвечает за запись действий пользователей в журнал или базу данных
