@@ -1,4 +1,6 @@
-﻿namespace ArtBot.Services.LoggingService
+﻿using ArtBot.DataAccessLayer.Entities;
+
+namespace ArtBot.Services.LoggingService
 {
     public class LoggingService : IService
     {
