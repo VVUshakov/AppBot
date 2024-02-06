@@ -1,11 +1,18 @@
 ﻿namespace ArtBot.Services.LoggingService
 {
-    internal class LoggingService : IService
+    public class LoggingService : IService
     {
+        private List<LoggingMode> _loggingModes;
+
+        public LoggingService(List<LoggingMode> loggingModes) => _loggingModes = loggingModes;
+
         public Task StartAsync()
         {
-            //TODO: заглушка
 
+
+
+
+            //TODO: заглушка
             Console.WriteLine("LoggingService запущен.");
             return Task.CompletedTask;
         }

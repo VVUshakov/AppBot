@@ -69,9 +69,6 @@ namespace ArtBot
             return botType switch
             {
                 BotType.Telegram => new TelegramBot(),
-                BotType.VK => new VKBot(),
-                BotType.Viber => new ViberBot(),
-                BotType.WhatsApp => new WhatsAppBot(),
                 _ => throw new ArgumentOutOfRangeException(),
             };
         }
@@ -83,10 +80,6 @@ namespace ArtBot
                 ServiceType.ResponseService => new ResponseService(),
                 ServiceType.MessageHandlingService => new MessageHandlingService(),
                 ServiceType.LoggingService => new LoggingService(),
-                ServiceType.DatabaseProcessor => new DatabaseProcessor(),
-                ServiceType.WebhookService => new WebhookService(),
-                ServiceType.AuthService => new AuthService(),
-                ServiceType.NotificationService => new NotificationService(),
                 ServiceType.RequestHandlerService => new RequestHandlerService(),
                 _ => throw new ArgumentOutOfRangeException(),
             };
