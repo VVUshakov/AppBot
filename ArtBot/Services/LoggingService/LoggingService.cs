@@ -3,12 +3,8 @@
     public static class LoggingService
     {
         private static bool _disposed = false;
-        private static readonly List<ILogger>? _loggers;
+        private static List<ILogger>? _loggers;
 
-        static LoggingService() 
-        {
-            _loggers = GetLoggers();
-        }
         private static List<ILogger> GetLoggers()
         {
             return [new ConsoleLogger(),];
@@ -29,6 +25,7 @@
 
         public static async Task StartAsync()
         {
+            _loggers = GetLoggers();
             _disposed = true;
             await LogMessageAsync("LoggingService запущен.");
         }
