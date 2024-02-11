@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using Telegram.Bot.Types;
-
-namespace ArtBot.Services.LoggingService
+﻿namespace ArtBot.Services.Logging
 {
-    public class LoggingService : IService
+    public static class LoggingService
     {
         private static List<ILogger>? loggers;
 
-        public List<ILogger> GetLoggers()
+        static LoggingService() 
         {
-            return [ new ConsoleLogger(), ];
+            loggers = GetLoggers();
+        }
+        private static List<ILogger> GetLoggers()
+        {
+            return [new ConsoleLogger(),];
 
             //TODO: изменить на получение списка из внешенго источника
         }
@@ -21,7 +22,7 @@ namespace ArtBot.Services.LoggingService
                     logger.Log(message);
         }
 
-        public Task StartAsync()
+        public static Task StartAsync()
         {
             loggers = GetLoggers();
             LogMessage("LoggingService запущен.");

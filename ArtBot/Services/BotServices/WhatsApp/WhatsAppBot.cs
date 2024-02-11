@@ -1,4 +1,4 @@
-﻿namespace ArtBot.Services.BotServices.WhatsApp
+﻿namespace ArtBot.Services.Bot.WhatsApp
 {
     public class WhatsAppBot : IBotService
     {

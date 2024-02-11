@@ -1,4 +1,4 @@
-﻿namespace ArtBot.Services.LoggingService
+﻿namespace ArtBot.Services.Logging
 {
     public interface ILogger
     {

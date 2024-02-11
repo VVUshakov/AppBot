@@ -1,4 +1,4 @@
-﻿namespace ArtBot.Services.BotServices.VK
+﻿namespace ArtBot.Services.Bot.VK
 {
     public class VKBot : IBotService
     {

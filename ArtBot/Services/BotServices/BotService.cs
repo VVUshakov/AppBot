@@ -1,4 +1,4 @@
-﻿namespace ArtBot.Services.BotServices
+﻿namespace ArtBot.Services.Bot
 {
     /// <summary>
     /// Класс BotService, реализует интерфейс IService. 

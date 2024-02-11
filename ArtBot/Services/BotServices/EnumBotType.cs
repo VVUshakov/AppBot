@@ -1,4 +1,4 @@
-﻿namespace ArtBot.Services.BotServices
+﻿namespace ArtBot.Services.Bot
 {
     /// <summary>
     /// BotType - это перечисление, которое содержит возможные типы ботов. 

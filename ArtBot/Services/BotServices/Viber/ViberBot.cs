@@ -1,4 +1,4 @@
-﻿namespace ArtBot.Services.BotServices.Viber
+﻿namespace ArtBot.Services.Bot.Viber
 {
     public class ViberBot : IBotService
     {

@@ -1,6 +1,7 @@
 ﻿using Telegram.Bot;
+using ArtBot.Services.Logging;
 
-namespace ArtBot.Services.BotServices.TG
+namespace ArtBot.Services.Bot.TG
 {
     public class TelegramBot : IBotService
     {
@@ -17,7 +18,7 @@ namespace ArtBot.Services.BotServices.TG
         {
             // Создать экземпляр Бота
             var botClient = new TelegramBotClient(Token);
-            
+
             await Log(botClient);
         }
 
@@ -26,6 +27,8 @@ namespace ArtBot.Services.BotServices.TG
             // Получить сведения о боте и вывести в консоль
             var me = await botClient.GetMeAsync();
             Console.WriteLine($"TelegramBot {me.Id} запущен с именем {me.FirstName}.");
+
+            LoggingService.LogMessage();
 
             //TODO: переделать на отправку сообщения в сервис Логгирования
         }
