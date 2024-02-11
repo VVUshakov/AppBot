@@ -19,18 +19,9 @@ namespace ArtBot.Services.Bot.TG
             // Создать экземпляр Бота
             var botClient = new TelegramBotClient(Token);
 
-            await Log(botClient);
-        }
-
-        private async Task Log(TelegramBotClient botClient)
-        {            
-            // Получить сведения о боте и вывести в консоль
+            // Получить сведения о боте и отправить на логирование
             var me = await botClient.GetMeAsync();
-            Console.WriteLine($"TelegramBot {me.Id} запущен с именем {me.FirstName}.");
-
-            LoggingService.LogMessage();
-
-            //TODO: переделать на отправку сообщения в сервис Логгирования
+            await LoggingService.LogMessageAsync($"TelegramBot {me.Id} запущен с именем {me.FirstName}.");
         }
     }
 }
