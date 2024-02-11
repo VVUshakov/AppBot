@@ -2,11 +2,12 @@
 {
     public static class LoggingService
     {
-        private static List<ILogger>? loggers;
+        private static bool _disposed = false;
+        private static readonly List<ILogger>? _loggers;
 
         static LoggingService() 
         {
-            loggers = GetLoggers();
+            _loggers = GetLoggers();
         }
         private static List<ILogger> GetLoggers()
         {
@@ -17,10 +18,10 @@
 
         public static Task LogMessageAsync(string message)
         {
-            if (loggers != null)
+            if (_disposed && _loggers != null)
             {
-                lock (loggers)
-                    foreach (var logger in loggers)
+                lock (_loggers)
+                    foreach (var logger in _loggers)
                         logger.Log(message);
             }
             return Task.CompletedTask;
@@ -28,8 +29,14 @@
 
         public static async Task StartAsync()
         {
-            loggers = GetLoggers();
+            _disposed = true;
             await LogMessageAsync("LoggingService запущен.");
+        }
+
+        public static async Task StopAsync()
+        {
+            await LogMessageAsync("LoggingService остановлен.");
+            _disposed = false;            
         }
     }
 }

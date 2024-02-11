@@ -1,7 +1,5 @@
-﻿using ArtBot;
-using ArtBot.Services;
-using ArtBot.Services.BotServices.TG;
-using ArtBot.Services.LoggingService;
+﻿using ArtBot.Services.Bot.TG;
+using ArtBot.Services.Logging;
 using ArtBot.Services.RequestHandlerService;
 
 
@@ -18,12 +16,12 @@ class Program
     {
         var telegramBot = new TelegramBot();
         var requestHandlerService = new RequestHandlerService();
-        var loggingService = new LoggingService();
+
 
 
         await telegramBot.StartAsync();
         await requestHandlerService.StartAsync();
-        await loggingService.StartAsync();
+        await LoggingService.StartAsync();
 
         /*
         // Сконфигурировать параметры загрузки приложения
@@ -41,10 +39,10 @@ class Program
         // Получение входящего запроса от клиента
         string request = await GetRequestFromClientAsync();
 
-        
+
         // Обработка запроса
         await requestHandlerService.HandleRequestAsync(request);
-        
+
     }
 
     static async Task<string> GetRequestFromClientAsync()
