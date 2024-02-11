@@ -15,19 +15,21 @@
             //TODO: изменить на получение списка из внешенго источника
         }
 
-        public static void LogMessage(string message)
+        public static Task LogMessageAsync(string message)
         {
             if (loggers != null)
+            {
                 lock (loggers)
                     foreach (var logger in loggers)
                         logger.Log(message);
+            }
+            return Task.CompletedTask;
         }
 
-        public static Task StartAsync()
+        public static async Task StartAsync()
         {
             loggers = GetLoggers();
-            LogMessage("LoggingService запущен.");
-            return Task.CompletedTask;
+            await LogMessageAsync("LoggingService запущен.");
         }
     }
 }
