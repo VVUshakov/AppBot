@@ -1,61 +1,30 @@
-﻿namespace ArtBot.Services.LoggingService
+﻿using System.Collections.Generic;
+using Telegram.Bot.Types;
+
+namespace ArtBot.Services.LoggingService
 {
-    /*
     public class LoggingService : IService
     {
-        public LoggingService(string message)
-        {
-            Log(message);
-        }
-
-        public void Log(string message)
-        {
-            Console.WriteLine(message);
-        }
-
-        public Task StartAsync()
-        {
-            //TODO: заглушка
-
-            Console.WriteLine("LoggingService запущен.");
-            return Task.CompletedTask;
-        }
-    }
-    */
-
-    public class LoggingService
-    {
-        private readonly List<ILogger> loggers;
-
-        public LoggingService()
-        {
-            loggers = GetLoggers();
-        }
+        private static List<ILogger>? loggers;
 
         public List<ILogger> GetLoggers()
         {
-            return loggers;
-            //TODO: изменить в будущем на получение списка из внешенго источника
+            return [ new ConsoleLogger(), ];
+
+            //TODO: изменить на получение списка из внешенго источника
         }
 
-        public void AddLogger(ILogger logger)
+        public static void LogMessage(string message)
         {
-            loggers.Add(logger);
-        }
-
-        public void LogMessage(string message)
-        {
-            foreach (var logger in loggers)
-            {
-                logger.Log(message);
-            }
+            if (loggers != null)
+                foreach (var logger in loggers)
+                    logger.Log(message);
         }
 
         public Task StartAsync()
         {
-            //TODO: заглушка
-
-            Console.WriteLine("LoggingService запущен.");
+            loggers = GetLoggers();
+            LogMessage("LoggingService запущен.");
             return Task.CompletedTask;
         }
     }
