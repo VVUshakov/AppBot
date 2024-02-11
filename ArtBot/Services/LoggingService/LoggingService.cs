@@ -29,7 +29,13 @@
 
         public LoggingService()
         {
-            loggers = [];
+            loggers = GetLoggers();
+        }
+
+        public List<ILogger> GetLoggers()
+        {
+            return loggers;
+            //TODO: изменить в будущем на получение списка из внешенго источника
         }
 
         public void AddLogger(ILogger logger)
