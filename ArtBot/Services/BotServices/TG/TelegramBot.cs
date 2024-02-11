@@ -4,7 +4,7 @@ namespace ArtBot.Services.BotServices.TG
 {
     public class TelegramBot : IBotService
     {
-        public string Token { get; }
+        private string Token { get; }
 
         public TelegramBot()
         {            
