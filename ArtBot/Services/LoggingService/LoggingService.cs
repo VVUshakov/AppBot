@@ -18,8 +18,9 @@
         public static void LogMessage(string message)
         {
             if (loggers != null)
-                foreach (var logger in loggers)
-                    logger.Log(message);
+                lock (loggers)
+                    foreach (var logger in loggers)
+                        logger.Log(message);
         }
 
         public static Task StartAsync()
