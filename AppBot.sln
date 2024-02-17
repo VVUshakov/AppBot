@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "artBot", "src\artBot.prj\artBot.csproj", "{D62FB8A7-D7C8-41B0-A0A9-CA497A9E904C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nUnitTests", "src\tests\nUnitTests\nUnitTests.csproj", "{A3C9316F-E943-4097-8047-E3EABD74ADF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nUnitTests", "src\tests\nUnitTests.prj\nUnitTests.csproj", "{8E072325-DBDB-41FC-B799-B178571FCD4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{D62FB8A7-D7C8-41B0-A0A9-CA497A9E904C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D62FB8A7-D7C8-41B0-A0A9-CA497A9E904C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D62FB8A7-D7C8-41B0-A0A9-CA497A9E904C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3C9316F-E943-4097-8047-E3EABD74ADF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3C9316F-E943-4097-8047-E3EABD74ADF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3C9316F-E943-4097-8047-E3EABD74ADF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3C9316F-E943-4097-8047-E3EABD74ADF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E072325-DBDB-41FC-B799-B178571FCD4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E072325-DBDB-41FC-B799-B178571FCD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E072325-DBDB-41FC-B799-B178571FCD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E072325-DBDB-41FC-B799-B178571FCD4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
