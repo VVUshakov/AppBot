@@ -1,6 +1,4 @@
-﻿using ArtBot.Services.BotServices;
-
-namespace ArtBot.Services
+﻿namespace ArtBot.Services
 {
     /// <summary>
     /// Класс AppService, реализует интерфейс IService. 

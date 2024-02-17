@@ -1,12 +1,11 @@
 ﻿using ArtBot.Services;
 using ArtBot.Services.AuthService;
-using ArtBot.Services.BotServices;
-using ArtBot.Services.BotServices.TG;
-using ArtBot.Services.BotServices.Viber;
-using ArtBot.Services.BotServices.VK;
-using ArtBot.Services.BotServices.WhatsApp;
+using ArtBot.Services.Bot;
+using ArtBot.Services.Bot.TG;
+using ArtBot.Services.Bot.Viber;
+using ArtBot.Services.Bot.VK;
+using ArtBot.Services.Bot.WhatsApp;
 using ArtBot.Services.DatabaseProcessor;
-using ArtBot.Services.LoggingService;
 using ArtBot.Services.MessageHandlingService;
 using ArtBot.Services.NotificationService;
 using ArtBot.Services.RequestHandlerService;
@@ -43,10 +42,10 @@ namespace ArtBot
             listBots.AddRange(Enum.GetValues(typeof(BotType))
                     .Cast<BotType>()
                     .Select(GetBotService));
-            if (listBots.Count <= 0) 
+            if (listBots.Count <= 0)
                 throw new InvalidOperationException("Нет подписанных ботов для загрузки.");
             return listBots;
-            
+
         }
         /// <summary>
         /// Создание списка экземпляров сервисов
@@ -54,16 +53,16 @@ namespace ArtBot
         /// <param name="listBots"></param>
         /// <returns></returns>
         private List<IService> GetListServices()
-        {   
+        {
             var listServices = new List<IService>();
             listServices.AddRange(Enum.GetValues(typeof(ServiceType))
                 .Cast<ServiceType>()
                 .Select(GetService));
-            if (listServices.Count <= 0) 
+            if (listServices.Count <= 0)
                 throw new InvalidOperationException("Нет подписанных сервисов для загрузки.");
-            return listServices;            
+            return listServices;
         }
-                
+
         private IBotService GetBotService(BotType botType)
         {
             return botType switch
@@ -82,7 +81,7 @@ namespace ArtBot
                 ServiceType.BotService => new BotService(ListBots),
                 ServiceType.ResponseService => new ResponseService(),
                 ServiceType.MessageHandlingService => new MessageHandlingService(),
-                ServiceType.LoggingService => new LoggingService(),
+                //ServiceType.LoggingService => new LoggingService(),
                 ServiceType.DatabaseProcessor => new DatabaseProcessor(),
                 ServiceType.WebhookService => new WebhookService(),
                 ServiceType.AuthService => new AuthService(),
