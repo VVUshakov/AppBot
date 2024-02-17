@@ -34,7 +34,7 @@ class Program
 
 
         // Обработка запроса
-        await requestHandlerService.HandleRequestAsync(request);
+        //await requestHandlerService.HandleRequestAsync(request);
 
     }
 
