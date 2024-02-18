@@ -358,3 +358,4 @@ MigrationBackup/
 .idea/
 *.DS_Store
 *.exe
+.env
