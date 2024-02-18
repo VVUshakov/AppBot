@@ -27,8 +27,8 @@ namespace NUnitTests
             propertyName2 = "PropertyName2";
             dateAndTime1 = DateTime.Now;
             dateAndTime2 = DateTime.Now.AddDays(1);
-            DateTime dateOnly1 = dateAndTime1.Date;
-            DateTime dateOnly2 = dateAndTime2.Date;
+            dateOnly1 = dateAndTime1.Date;
+            dateOnly2 = dateAndTime2.Date;
             newValue1 = "NewValue1";
             newValue2 = "NewValue2";
 
@@ -43,9 +43,6 @@ namespace NUnitTests
             // Assert
             Assert.Multiple(() =>
             {
-                //Assert.That(history.HistoryChanges.ContainsKey(propertyName1), Is.True); //private HistoryChanges
-                //Assert.That(history.HistoryChanges[propertyName1].ContainsKey(dateAndTime1), Is.True); //private HistoryChanges
-                //Assert.That(history.HistoryChanges[propertyName1][dateAndTime1], Is.EqualTo(newValue1)); //private HistoryChanges
                 Assert.That(history.GetHistoryProperty(propertyName1).ContainsKey(dateAndTime1), Is.True);
                 Assert.That(history.GetValuePropertyOnDate(propertyName1, dateAndTime1), Is.EqualTo(newValue1));
             });

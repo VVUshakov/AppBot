@@ -1,6 +1,5 @@
 ﻿using ArtBot.DataAccessLayer.Stories;
 
-
 namespace ArtBot.DataAccessLayer.Galleries
 {
     /// <summary>
